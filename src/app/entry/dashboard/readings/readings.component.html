@@ -1,0 +1,51 @@
+<div id="wrapper">
+
+  <div id="col-01">
+    <mat-card>
+      <mat-card-content>
+
+        <p>Account details</p>
+        <h4>DX-895704368175</h4>
+        <h4>Dr. Lena Sims</h4>
+
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div id="col-02">
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let item of [0,0,0,0,0]">
+        <mat-expansion-panel-header>
+          Johanna Hawkins - No. PX-250893605663
+        </mat-expansion-panel-header>
+        <mat-card>
+          <mat-card-content>
+
+            <div>
+              <p>Patient details:</p>
+              <h5>Johanna Hawkins</h5>
+              <h5>PX-250893605663</h5>
+              <h5>pb@p.com</h5>
+            </div>
+
+            <div>
+              <p>Patient readings:</p>
+              <h5>SBP: 77.77</h5>
+              <h5>DBP: 77.77</h5>
+              <h5>HR: 77.77</h5>
+            </div>
+
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button (click)="setTime()">SET DEVICE TIME</button>
+            <button mat-raised-button (click)="addRemarks()">ADD REMARKS</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </div>
+
+</div>
