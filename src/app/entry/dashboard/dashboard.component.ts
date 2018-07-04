@@ -8,15 +8,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  tabLinks = [
+  tabLinks = [];
+  links = [
     { label: 'Patient\'s Messages', link: 'message' },
-    { label: 'Patient Readings', link: 'readings' }
+    { label: 'Patient Readings', link: 'readings' },
+    { label: 'Patient Readings', link: ['/', 'u'] }
   ];
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.router.navigate(['/', 'u', 'readings']);
+    this.tabLinks = this.links.filter(e => e.link !== 'readings');
+  }
+
+  onClick(index: number) {
+    index === 1 ? this.router.navigate(['readings'], { relativeTo: this.route }) : 0;
+    this.tabLinks = this.links.filter(e => typeof e.link !== 'object');
   }
 
 }

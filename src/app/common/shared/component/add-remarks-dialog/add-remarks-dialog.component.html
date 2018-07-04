@@ -16,9 +16,10 @@
       <mat-hint align="end">
         {{ textarea.value.length }} / 200
       </mat-hint>
+      <mat-hint *ngIf="isDisable" align="start">Message must be greater than 10 characters.</mat-hint>
     </mat-form-field>
 
-    <button mat-raised-button type="submit">
+    <button mat-raised-button [disabled]="isDisable">
       <span>SEND</span>
     </button>
 

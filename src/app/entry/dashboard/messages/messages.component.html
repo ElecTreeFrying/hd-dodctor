@@ -3,15 +3,19 @@
 
     <mat-nav-list>
 
-      <mat-list-item *ngFor="let item of [0,0,0,0,0,0]">
-        <span mat-line id="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-        <span mat-line id="time">Tue, Mar 6, 2018 1:41 PM &nbsp;&nbsp;|&nbsp;&nbsp; Johanna Hawkins</span>
-        <button mat-icon-button (click)="expandMessages()">
+      <mat-list-item *ngFor="let message of patientMessages | async">
+        <span mat-line id="message">{{ message?.message }}</span>
+        <span mat-line id="time">{{ message?.timestamp | timestamp }} &nbsp;&nbsp;|&nbsp;&nbsp; {{ message?.from }}</span>
+        <button mat-icon-button (click)="expandMessages(message)">
           <mat-icon>fullscreen</mat-icon>
         </button>
       </mat-list-item>
 
     </mat-nav-list>
+    
+    <div id="spinner" *ngIf="isLoading">
+      <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
+    </div>
 
   </mat-card-content>
 </mat-card>

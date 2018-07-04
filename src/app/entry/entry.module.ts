@@ -8,7 +8,7 @@ import { EntryMaterialModule } from '../common/core/module/material/entry-materi
 import { EntryComponent } from './entry.component';
 import { LoginDialogComponent } from '../common/shared/component/login-dialog/login-dialog.component';
 
-import { SharedService } from '../common/core/service/shared.service';
+import { FirestoreService } from '../common/core/service/firestore.service';
 
 @NgModule({
   imports: [
@@ -19,13 +19,9 @@ import { SharedService } from '../common/core/service/shared.service';
   ],
   declarations: [
     EntryComponent,
-    LoginDialogComponent
-  ],
-  entryComponents: [
-    LoginDialogComponent
   ],
   providers: [
-    SharedService
+    FirestoreService
   ]
 })
 export class EntryModule { }

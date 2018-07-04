@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-expand-messages-dialog',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExpandMessagesDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
   }

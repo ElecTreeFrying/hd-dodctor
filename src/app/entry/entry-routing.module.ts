@@ -5,7 +5,7 @@ import { EntryComponent } from "./entry.component";
 
 const routes: Routes = [
   { path: '', component: EntryComponent, children: [
-    { path: 'u', loadChildren: './dashboard/dashboard.module#DashboardModule' }
+    { path: '', loadChildren: './dashboard/dashboard.module#DashboardModule' }
   ] }
 ];
 

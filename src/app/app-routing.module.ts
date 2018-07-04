@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { StartupComponent } from './common/shared/component/startup/startup.component';
+
+import { EntryGuard, ExitGuard } from './common/core/service/route-guards';
+
 const routes: Routes = [
-  { path: '', loadChildren: './entry/entry.module#EntryModule' }
+  { path: '', component: StartupComponent, canActivate: [ ExitGuard ] },
+  { path: 'u', loadChildren: './entry/entry.module#EntryModule', canActivate: [ EntryGuard ] }
 ];
 
 @NgModule({

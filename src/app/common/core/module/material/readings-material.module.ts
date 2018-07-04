@@ -9,7 +9,9 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatOptionModule,
-  MatSelectModule
+  MatSelectModule,
+  MatProgressSpinnerModule,
+  MatListModule
 } from '@angular/material';
 
 @NgModule({
@@ -22,7 +24,9 @@ import {
     MatDialogModule,
     MatInputModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatListModule
   ]
 })
 export class ReadingsMaterialModule { }

@@ -7,6 +7,8 @@ import { MessagesMaterialModule } from '../../../common/core/module/material/mes
 import { MessagesComponent } from './messages.component';
 import { ExpandMessagesDialogComponent } from '../../../common/shared/component/expand-messages-dialog/expand-messages-dialog.component';
 
+import { TimestampPipe } from '../../../common/shared/pipe/timestamp.pipe';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +17,8 @@ import { ExpandMessagesDialogComponent } from '../../../common/shared/component/
   ],
   declarations: [
     MessagesComponent,
-    ExpandMessagesDialogComponent
+    ExpandMessagesDialogComponent,
+    TimestampPipe
   ],
   entryComponents: [
     ExpandMessagesDialogComponent

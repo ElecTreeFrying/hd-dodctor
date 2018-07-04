@@ -5,9 +5,11 @@
       <mat-card-content>
 
         <p>Account details</p>
-        <h4>DX-895704368175</h4>
-        <h4>Dr. Lena Sims</h4>
-
+        <div id="spinner" *ngIf="isUndefined">
+          <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
+        </div>
+        <h4>{{ doctorDetails?.doctorNo }}</h4>
+        <h4>{{ doctorDetails?.fullname }}</h4>
 
       </mat-card-content>
     </mat-card>
@@ -15,32 +17,36 @@
 
   <div id="col-02">
 
+    <div id="spinner" *ngIf="isLoadingList">
+      <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
+    </div>
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let item of [0,0,0,0,0]">
+      <mat-expansion-panel *ngFor="let patient of (doctorPatients | async); index as i" [expanded]="i === 0">
         <mat-expansion-panel-header>
-          Johanna Hawkins - No. PX-250893605663
+          {{ patient?.fullname }} - No. {{ patient?.patientNo }}
         </mat-expansion-panel-header>
         <mat-card>
           <mat-card-content>
 
             <div>
               <p>Patient details:</p>
-              <h5>Johanna Hawkins</h5>
-              <h5>PX-250893605663</h5>
-              <h5>pb@p.com</h5>
+              <h5>{{ patient?.fullname }}</h5>
+              <h5>{{ patient?.patientNo }}</h5>
+              <h5>{{ patient | email | async }}</h5>
             </div>
 
             <div>
-              <p>Patient readings:</p>
-              <h5>SBP: 77.77</h5>
-              <h5>DBP: 77.77</h5>
-              <h5>HR: 77.77</h5>
+              <p>Patient readings: (latest)</p>
+              <h5>SBP: {{ patient | latestSbp | async }}</h5>
+              <h5>DBP: {{ patient | latestDbp | async }}</h5>
+              <h5>HR: {{ patient | latestHr | async }}</h5>
             </div>
 
           </mat-card-content>
           <mat-card-actions>
-            <button mat-raised-button (click)="setTime()">SET DEVICE TIME</button>
-            <button mat-raised-button (click)="addRemarks()">ADD REMARKS</button>
+            <button mat-raised-button (click)="setTime(patient)">SET DEVICE TIME</button>
+            <button mat-raised-button (click)="addRemarks(patient)">ADD REMARKS</button>
+            <button mat-raised-button (click)="showAllReadings(patient)">ALL READINGS</button>
           </mat-card-actions>
         </mat-card>
       </mat-expansion-panel>

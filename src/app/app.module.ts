@@ -5,10 +5,24 @@ import { AppProviderModule } from "./app-provider.module";
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { LoginDialogComponent } from './common/shared/component/login-dialog/login-dialog.component';
+
+import { AuthService } from './common/core/service/auth.service';
+
+
+
+import { Router, NavigationStart } from '@angular/router';
+import { map } from 'rxjs/operators'
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginDialogComponent
+  ],
+  entryComponents: [
+    LoginDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -17,6 +31,22 @@ import { AppComponent } from './app.component';
   ],
   bootstrap: [
     AppComponent
+  ],
+  providers: [
+    AuthService
   ]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {
+    this.authService.state.pipe(
+      map((user: any) => user !== null)
+    ).subscribe((state) => {
+      state ? this.router.navigate(['/', 'u']) : this.router.navigate(['/']);
+    });
+  }
+
+}

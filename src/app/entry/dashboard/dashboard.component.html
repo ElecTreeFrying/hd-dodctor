@@ -5,7 +5,7 @@
       *ngFor="let tabLink of tabLinks; let i = index"
       [routerLink]="tabLink.link"
       routerLinkActive #rla="routerLinkActive"
-      [active]="rla.isActive">
+      [active]="rla.isActive" (click)="onClick(i)">
       {{ tabLink.label }}
     </p>
   </nav>

@@ -6,8 +6,14 @@ import { ReadingsRoutingModule } from './readings-routing.module';
 import { ReadingsMaterialModule } from '../../../common/core/module/material/readings-material.module';
 
 import { ReadingsComponent } from './readings.component';
-import { AddRemarksDialogComponent } from '../../../common/shared/component/add-remarks-dialog/add-remarks-dialog.component';
 import { SetTimeDialogComponent } from '../../../common/shared/component/set-time-dialog/set-time-dialog.component';
+import { AddRemarksDialogComponent } from '../../../common/shared/component/add-remarks-dialog/add-remarks-dialog.component';
+import { AllReadingsDialogComponent } from '../../../common/shared/component/all-readings-dialog/all-readings-dialog.component';
+
+import { LatestSbpPipe } from '../../../common/shared/pipe/latest-sbp.pipe';
+import { LatestDbpPipe } from '../../../common/shared/pipe/latest-dbp.pipe';
+import { LatestHrPipe } from '../../../common/shared/pipe/latest-hr.pipe';
+import { GetEmailPipe } from '../../../common/shared/pipe/get-email.pipe';
 
 @NgModule({
   imports: [
@@ -18,12 +24,18 @@ import { SetTimeDialogComponent } from '../../../common/shared/component/set-tim
   ],
   declarations: [
     ReadingsComponent,
+    SetTimeDialogComponent,
     AddRemarksDialogComponent,
-    SetTimeDialogComponent
+    AllReadingsDialogComponent,
+    LatestSbpPipe,
+    LatestDbpPipe,
+    LatestHrPipe,
+    GetEmailPipe
   ],
   entryComponents: [
+    SetTimeDialogComponent,
     AddRemarksDialogComponent,
-    SetTimeDialogComponent
+    AllReadingsDialogComponent
   ]
 })
 export class ReadingsModule { }

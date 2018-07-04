@@ -4,6 +4,15 @@
   flex-flow: row wrap;
   justify-content: space-between;
 
+  #spinner {
+    width: 100%;
+    display: flex;
+
+    .mat-progress-spinner {
+      margin: auto;
+    }
+  }
+
   #col-01 {
     flex-basis: calc(30% - 10px);
 
@@ -50,7 +59,7 @@
       justify-content: space-between;
 
       .mat-raised-button {
-        flex-basis: 49%;
+        flex-basis: 32%;
       }
     }
   }
