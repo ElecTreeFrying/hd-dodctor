@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators'
 
 import { FirestoreService } from '../../../core/service/firestore.service';
 
@@ -23,9 +24,7 @@ export class AllReadingsDialogComponent implements OnInit {
   ngOnInit() {
     this.readings = this.firestoreService.getPatientReadings(this.data.patientNo);
 
-    this.readings.subscribe(() => {
-      this.isAdded = true;
-    });
+    this.readings.subscribe(() => (this.isAdded = true));
   }
 
 

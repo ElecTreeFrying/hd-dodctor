@@ -63,7 +63,6 @@ export class LoginDialogComponent implements OnInit {
         this.sharedService.signInError(state);
       });
 
-
   }
 
 }

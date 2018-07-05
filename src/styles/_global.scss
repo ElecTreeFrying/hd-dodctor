@@ -27,13 +27,13 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (min-width: 576px) {
   .wrap {
-    max-width: 540px;
+    max-width: auto;
   }
 }
 
 @media (min-width: 768px) {
   .wrap {
-    max-width: 720px;
+    max-width: auto;
   }
 }
 
@@ -46,5 +46,11 @@ h1, h2, h3, h4, h5, h6 {
 @media (min-width: 1200px) {
   .wrap {
     max-width: 1190px;
+  }
+}
+
+@media (max-width: 824px) {
+  .wrap {
+    max-width: 450px;
   }
 }

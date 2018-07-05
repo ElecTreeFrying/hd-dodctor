@@ -47,7 +47,7 @@ export class ReadingsComponent implements OnInit {
   }
 
   setTime(patient: any) {
-    this.dialogRef_ST = this.dialog.open(SetTimeDialogComponent, { });
+    this.dialogRef_ST = this.dialog.open(SetTimeDialogComponent, { data: { patient, doctor: this.doctorDetails}});
   }
 
   addRemarks(patient: any) {

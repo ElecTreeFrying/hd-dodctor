@@ -71,12 +71,4 @@ export class SharedService {
     this.snack.open(error.message, '', config);
   }
 
-  signUpError(error: any) {
-    let config = new MatSnackBarConfig();
-    config.duration = 7000;
-    config.horizontalPosition = this.horizontal;
-    config.verticalPosition = this.vertical;
-    this.snack.open(error.message, '', config);
-  }
-
 }

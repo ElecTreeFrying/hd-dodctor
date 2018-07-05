@@ -2,7 +2,7 @@
   "name": "hd-doctor",
   "version": "0.0.0",
   "scripts": {
-    "s": "ng serve --port 8002",
+    "s": "ng serve --port 7002",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -28,6 +28,7 @@
     "core-js": "^2.5.4",
     "firebase": "^5.2.0",
     "hammerjs": "^2.0.8",
+    "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.2.1",

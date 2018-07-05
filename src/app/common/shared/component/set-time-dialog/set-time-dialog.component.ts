@@ -1,5 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+
+import { FirestoreService } from '../../../core/service/firestore.service';
 
 @Component({
   selector: 'app-set-time-dialog',
@@ -14,9 +17,14 @@ export class SetTimeDialogComponent implements OnInit {
   duration = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   between = [];
 
-  constructor(@Inject(FormBuilder) public fb: FormBuilder) {
+  constructor(
+    @Inject(FormBuilder) public fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialog: MatDialog,
+    private firestoreService: FirestoreService
+  ) {
     this.form = fb.group({
-      'recipient': [ 'Johanna Hawkins' ],
+      'recipient': [ this.data.patient.fullname ],
       'duration': [ '' ],
       'between': [ '' ],
     })
@@ -68,7 +76,21 @@ export class SetTimeDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    delete this.data.doctor['email'];
+    delete this.data.doctor['password'];
+
+    const duration = this.form.value.duration * 1000 * 60 * 60;
+    const between = this.form.value.between * 1000 * 60 * 60;
+
+    const setTime = {
+      duration,
+      between,
+      to: this.data.patient,
+      from: this.data.doctor
+    };
+
+    this.firestoreService.setTime(setTime);
+    this.dialog.closeAll();
   }
 
 }

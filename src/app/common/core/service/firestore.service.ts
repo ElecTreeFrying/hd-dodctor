@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { map, switchMap } from 'rxjs/operators';
+// import 'rxjs/add/operator/switchMap';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/filter';
 import * as moment from 'moment';
+import * as _ from 'lodash';
 
 import { AuthService } from './auth.service';
 import { DatabaseService } from './database.service';
@@ -17,6 +21,7 @@ export class FirestoreService {
   private dataReadings: AngularFirestoreCollection<any>;
   private dataPatients: AngularFirestoreCollection<any>;
   private dataDoctors: AngularFirestoreCollection<any>;
+  private dataTimings: AngularFirestoreCollection<any>;
 
   constructor(
     private firestore: AngularFirestore,
@@ -30,6 +35,7 @@ export class FirestoreService {
     this.dataReadings = firestore.collection('data-readings');
     this.dataPatients = firestore.collection('data-patients');
     this.dataDoctors = firestore.collection('data-doctors');
+    this.dataTimings = firestore.collection('data-timings');
   }
 
   enableNetwork() {
@@ -73,7 +79,7 @@ export class FirestoreService {
   getPatientReadings(patientNo: string) {
     return this.dataReadings.snapshotChanges().pipe(
       map((values) => {
-        return values.map((value) => {
+        const readings = values.map((value) => {
 
           const index = value.payload.newIndex;
           const data = value.payload.doc.data();
@@ -88,6 +94,8 @@ export class FirestoreService {
           });
           return { index, ...object };
         }).filter((e: any) => e.patientNo === patientNo);
+
+        return <any[]>_.sortBy(readings, [(message) => message.timestamp]).reverse();
       })
     );
   }
@@ -123,6 +131,17 @@ export class FirestoreService {
         )
       })
     );
+  }
+
+  setTime(setTime: any) {
+    setTime['current'] = 0;
+    setTime['timing'] = false;
+    setTime['timestamp'] = moment().format('X');;
+
+    this.dataTimings.add({ ...setTime })
+      .then(() => {
+        this.database.createObject('data-timings', { ...setTime });
+      })
   }
 
 }

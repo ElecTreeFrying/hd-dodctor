@@ -7,7 +7,7 @@ import * as moment from 'moment';
 export class TimestampPipe implements PipeTransform {
 
   transform(unix: number, args?: any): any {
-    const newDate = new Date(unix*1000);;
+    const newDate = new Date(unix*1000);
     const timestamp = moment(newDate).fromNow();
 
     return timestamp;

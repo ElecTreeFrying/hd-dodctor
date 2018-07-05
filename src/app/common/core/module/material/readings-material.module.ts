@@ -3,7 +3,6 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import {
   MatCardModule,
   MatButtonModule,
-  MatDividerModule,
   MatExpansionModule,
   MatDialogModule,
   MatFormFieldModule,
@@ -19,7 +18,6 @@ import {
     CdkAccordionModule,
     MatCardModule,
     MatButtonModule,
-    MatDividerModule,
     MatExpansionModule,
     MatDialogModule,
     MatInputModule,
