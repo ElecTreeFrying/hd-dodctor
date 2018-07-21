@@ -15,7 +15,10 @@ export class EntryGuard implements CanActivate, CanActivateChild {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.fire.authState.pipe(
-      map((user: any) => user !== null)
+      map((user: any) => {
+        user === null ? this.router.navigate(['/']) : 0;
+        return user !== null;
+      })
     );
   }
 
@@ -37,7 +40,10 @@ export class ExitGuard implements CanActivate, CanActivateChild {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.fire.authState.pipe(
-      map((user: any) => user === null)
+      map((user: any) => {
+        user !== null ? this.router.navigate(['/u']) : 0;
+        return user === null;
+      })
     );
   }
 

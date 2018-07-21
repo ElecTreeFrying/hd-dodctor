@@ -9,13 +9,6 @@ import { LoginDialogComponent } from './common/shared/component/login-dialog/log
 
 import { AuthService } from './common/core/service/auth.service';
 
-
-
-import { Router, NavigationStart } from '@angular/router';
-import { map } from 'rxjs/operators'
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,17 +29,4 @@ import { map } from 'rxjs/operators'
     AuthService
   ]
 })
-export class AppModule {
-
-  constructor(
-    private router: Router,
-    private authService: AuthService
-  ) {
-    this.authService.state.pipe(
-      map((user: any) => user !== null)
-    ).subscribe((state) => {
-      state ? this.router.navigate(['/', 'u']) : this.router.navigate(['/']);
-    });
-  }
-
-}
+export class AppModule { }

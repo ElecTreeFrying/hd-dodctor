@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../../core/service/auth.service';
 import { FirestoreService } from '../../../core/service/firestore.service';
+import { DatabaseService } from '../../../core/service/database.service';
 import { SharedService } from '../../../core/service/shared.service';
 
 @Component({
@@ -21,16 +22,14 @@ export class LoginDialogComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private firestoreService: FirestoreService,
+    private databaseService: DatabaseService,
     private sharedService: SharedService
   ) {
     this.form = fb.group({
-      'email': [ 'd@a.com "password is 123123"', [ Validators.required, Validators.email ] ],
-      'password': [ '', [ Validators.required, Validators.minLength(2) ] ]
+      'email': [ 'd@a.com "password is 123123"' ],
+      'password': [ '' ]
     });
   }
-
-  get emailError(): ValidationErrors { return this.form.get('email').errors; }
-  get passwordError(): ValidationErrors { return this.form.get('password').errors; }
 
   ngOnInit() {
     this.form.valueChanges.subscribe(() => {
@@ -46,17 +45,12 @@ export class LoginDialogComponent implements OnInit {
 
     this.isProgressing = false;
 
-    if (this.form.invalid) {
-      this.isProgressing = true;
-      this.sharedService.formError();
-      return;
-    }
-
     this.authService.signIn(form.email, form.password)
       .then(() => {
         this.isProgressing = true;
         this.sharedService.signInSuccess();
         this.firestoreService.enableNetwork();
+        this.databaseService.goOnline();
         this.router.navigate(['/', 'u']);
       }).catch((state) => {
         this.isProgressing = true;
